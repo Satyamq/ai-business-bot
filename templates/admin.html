@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Leads Dashboard</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Status</th>
+        <th>WhatsApp</th>
+    </tr>
+
+    {% for lead in leads %}
+    <tr>
+        <td>{{ lead[0] }}</td>
+        <td>{{ lead[1] }}</td>
+        <td>{{ lead[2] }}</td>
+        <td>{{ lead[3] }}</td>
+
+        <td>
+            <a href="/whatsapp/{{ lead[1] }}">
+                Chat
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
