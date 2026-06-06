@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for, send_file
 from dotenv import load_dotenv
 from groq import Groq
 import csv
@@ -220,6 +220,13 @@ def update(index):
 
     return redirect(url_for("admin"))
 
+@app.route("/export")
+def export():
+    return send_file(
+        "leads.csv",
+        as_attachment=True,
+        download_name="RVIRAT_Leads.csv"
+    )
 
 @app.route("/admin")
 def admin():
