@@ -1,37 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RVIRAT Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <main class="page-shell dashboard-shell">
+        <div class="header-row">
+            <div>
+                <h1>RVIRAT Wealth Dashboard</h1>
+                <p>Lead management and follow-up status.</p>
+            </div>
+            <div class="action-row">
+                <a class="link-button" href="{{ url_for('home') }}">Bot</a>
+                <a class="link-button" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
 
-<h2>Leads Dashboard</h2>
+        <section class="stats-grid">
+            <article class="stat-card">
+                <span>Total Leads</span>
+                <strong>{{ total }}</strong>
+            </article>
+            <article class="stat-card">
+                <span>New Leads</span>
+                <strong>{{ new_count }}</strong>
+            </article>
+            <article class="stat-card">
+                <span>Contacted</span>
+                <strong>{{ contacted }}</strong>
+            </article>
+            <article class="stat-card">
+                <span>Converted</span>
+                <strong>{{ converted }}</strong>
+            </article>
+            <article class="stat-card">
+                <span>Hot</span>
+                <strong>{{ hot_count }}</strong>
+            </article>
+        </section>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Service</th>
-        <th>Status</th>
-        <th>WhatsApp</th>
-    </tr>
-
-    {% for lead in leads %}
-    <tr>
-        <td>{{ lead[0] }}</td>
-        <td>{{ lead[1] }}</td>
-        <td>{{ lead[2] }}</td>
-        <td>{{ lead[3] }}</td>
-
-        <td>
-            <a href="/whatsapp/{{ lead[1] }}">
-                Chat
-            </a>
-        </td>
-    </tr>
-    {% endfor %}
-
-</table>
-
+        <section class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Source</th>
+                        <th>WhatsApp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>
+                            <form class="status-form" action="{{ url_for('update', index=loop.index0) }}" method="POST">
+                                <select name="status">
+                                    {% for status in status_options %}
+                                    <option value="{{ status }}" {% if row[3] == status %}selected{% endif %}>
+                                        {{ status }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                        <td>{{ row[4] or "-" }}</td>
+                        <td>
+                            <a class="whatsapp-button" target="_blank" rel="noopener" href="{{ url_for('whatsapp', phone=row[1]) }}">
+                                WhatsApp
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="empty-cell">No leads saved yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>
