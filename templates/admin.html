@@ -19,7 +19,7 @@
                 <a class="link-button" href="/export">Export CSV</a>
 
                 <a class="link-button" href="{{ url_for('logout') }}">Logout</a>
-            </div>
+        </div>
         </div>
 
         <section class="stats-grid">
@@ -44,6 +44,14 @@
                 <strong>{{ hot_count }}</strong>
             </article>
         </section>
+        <div class="search-box">
+    <input
+        type="text"
+        id="leadSearch"
+        placeholder="Search by Name, Phone or Service..."
+        onkeyup="searchLeads()"
+    >
+</div>
 
         <section class="table-wrap">
             <table>
@@ -91,5 +99,24 @@
             </table>
         </section>
     </main>
+    <script>
+function searchLeads() {
+    let input = document.getElementById("leadSearch");
+    let filter = input.value.toLowerCase();
+
+    let table = document.querySelector("table");
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+        let text = rows[i].innerText.toLowerCase();
+
+        if (text.includes(filter)) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+</script>
 </body>
 </html>
