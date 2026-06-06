@@ -268,3 +268,14 @@ th {
     outline: none;
     border-color: #2563eb;
 }
+.chart-card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    border:1px solid #dfe5ec;
+}
+
+.chart-card h2{
+    margin-top:0;
+}
