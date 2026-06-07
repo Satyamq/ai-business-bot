@@ -4,27 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RVIRAT Admin Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    const ctx = document.getElementById('leadChart');
 
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['NEW', 'CONTACTED', 'CONVERTED', 'HOT'],
-        datasets: [{
-            label: 'Leads',
-            data: [
-                {{ new_count }},
-                {{ contacted }},
-                {{ converted }},
-                {{ hot_count }}
-            ]
-        }]
-    },
-    options: {
-        responsive: true
-    }
-});
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -141,6 +123,30 @@ function searchLeads() {
             rows[i].style.display = "none";
         }
     }
+}
+</script>
+<script>
+const ctx = document.getElementById('leadChart');
+
+if (ctx) {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['NEW', 'CONTACTED', 'CONVERTED', 'HOT'],
+            datasets: [{
+                label: 'Leads',
+                data: [
+                    {{ new_count }},
+                    {{ contacted }},
+                    {{ converted }},
+                    {{ hot_count }}
+                ]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
 }
 </script>
 </body>
