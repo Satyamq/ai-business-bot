@@ -70,8 +70,7 @@
                         <th>Status</th>
                         <th>Source</th>
                         <th>WhatsApp</th>
-                        <th>Notes</th>
-                        <th>Follow Up</th>
+                        <th>Lead Notes &amp; Follow Up</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,12 +97,26 @@
                                 WhatsApp
                             </a>
                         </td>
-                        <td>{{ row[5] if row|length > 5 else "-" }}</td>
-                        <td>{{ row[6] if row|length > 6 else "-" }}</td>
+                        <td>
+                            <form action="/update_note/{{ loop.index0 }}" method="POST">
+                                <input
+                                    type="text"
+                                    name="note"
+                                    value="{{ row[5] if row|length > 5 else '' }}"
+                                    placeholder="Add Note">
+
+                                <input
+                                    type="date"
+                                    name="followup"
+                                    value="{{ row[6] if row|length > 6 else '' }}">
+
+                                <button type="submit">Save</button>
+                            </form>
+                        </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="8" class="empty-cell">No leads saved yet.</td>
+                        <td colspan="7" class="empty-cell">No leads saved yet.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

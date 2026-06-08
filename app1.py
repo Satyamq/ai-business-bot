@@ -13,7 +13,7 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-secret-change-me")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_FILE = os.path.join(BASE_DIR, "leads.csv")
-CSV_HEADERS = ["Name", "Phone", "Service", "Status", "Source"]
+CSV_HEADERS = ["Name", "Phone", "Service", "Status", "Source", "Notes", "FollowUpDate"]
 STATUS_OPTIONS = ["NEW", "CONTACTED", "CONVERTED", "HOT"]
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
@@ -65,7 +65,7 @@ def read_leads():
 
 def save_lead(name, phone, service):
     leads = read_leads()
-    leads.append([name, phone, service, "NEW", "Website Bot"])
+    leads.append([name, phone, service, "NEW", "Website Bot", "", ""])
     write_leads(leads)
 
 
@@ -219,6 +219,30 @@ def update(index):
     write_leads(leads)
 
     return redirect(url_for("admin"))
+
+
+
+# Route to update note and follow-up date for a lead
+@app.route("/update_note/<int:index>", methods=["POST"])
+def update_note(index):
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    note = request.form.get("note", "").strip()
+    followup = request.form.get("followup", "").strip()
+
+    leads = read_leads()
+
+    if index < 0 or index >= len(leads):
+        return "Lead not found", 404
+
+    leads[index][5] = note
+    leads[index][6] = followup
+
+    write_leads(leads)
+
+    return redirect(url_for("admin"))
+
 
 @app.route("/export")
 def export():
