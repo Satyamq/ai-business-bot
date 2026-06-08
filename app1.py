@@ -220,6 +220,16 @@ def update(index):
 
     return redirect(url_for("admin"))
 
+@app.route("/delete/<int:index>")
+def delete(index):
+    leads = read_leads()
+
+    if index < len(leads):
+        leads.pop(index)
+        write_leads(leads)
+
+    return redirect(url_for("admin"))
+
 
 
 # Route to update note and follow-up date for a lead
