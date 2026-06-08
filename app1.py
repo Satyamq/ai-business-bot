@@ -228,7 +228,6 @@ def update(index):
     write_leads(leads)
 
     return redirect(url_for("admin"))
-
 @app.route("/delete/<int:index>")
 def delete(index):
 
@@ -241,16 +240,7 @@ def delete(index):
         leads.pop(index)
         write_leads(leads)
 
-    return redirect(url_for("admin"))  
-    leads = read_leads()
-
-    if index < len(leads):
-        leads.pop(index)
-        write_leads(leads)
-
     return redirect(url_for("admin"))
-
-
 
 # Route to update note and follow-up date for a lead
 @app.route("/update_note/<int:index>", methods=["POST"])
@@ -272,7 +262,6 @@ def update_note(index):
     write_leads(leads)
 
     return redirect(url_for("admin"))
-
 
 @app.route("/export")
 def export():
@@ -297,17 +286,17 @@ def admin():
         for status in STATUS_OPTIONS
     }
     
-
     return render_template(
-        "admin.html",
-        rows=leads,
-        status_options=STATUS_OPTIONS,
-        total=len(leads),
-        new_count=status_counts["new"],
-        contacted=status_counts["contacted"],
-        converted=status_counts["converted"],
-        hot_count=status_counts["hot"],
-    )
+    "admin.html",
+    rows=leads,
+    status_options=STATUS_OPTIONS,
+    total=len(leads),
+    new_count=status_counts["new"],
+    contacted=status_counts["contacted"],
+    converted=status_counts["converted"],
+    hot_count=status_counts["hot"],
+    today_followups=today_followups
+)
 
 
 ensure_csv_file()

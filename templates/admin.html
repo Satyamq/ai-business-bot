@@ -119,14 +119,18 @@
                             </form>
                         </td>
                           <td>
-                                       <a class="delete-btn"
-  
-                                    </td>
+                              <td>
+                                <a class="delete-btn"
+                                href="{{ url_for('delete', index=loop.index0) }}"
+                                onclick="return confirm('Delete this lead?');">
+                                ❌ Delete
+                                </a>
+                            </td>      
 
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="7" class="empty-cell">No leads saved yet.</td>
+                        <td colspan="8" class="empty-cell">No leads saved yet.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
