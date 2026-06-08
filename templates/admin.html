@@ -83,12 +83,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        {% if row[6] and row[6] < today %}
-                         style="background:#ffe5e5;"
-                        {% endif %}
-                        >
-                    <tr>
+                    {% for row in rows %}
+                    <tr {% if row[6] and row[6] < today %}style="background:#ffe5e5;"{% endif %}>
                         <td>{{ row[0] }}</td>
                         <td>{{ row[1] }}</td>
                         <td>{{ row[2] }}</td>
