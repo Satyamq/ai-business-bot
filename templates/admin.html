@@ -46,6 +46,10 @@
                 <span>Hot</span>
                 <strong>{{ hot_count }}</strong>
             </article>
+            <article class="stat-card">
+                <span>Today's Follow Ups</span>
+                <strong>{{ today_followups }}</strong>
+            </article>
         </section>
         <div class="chart-card">
             <h2>Lead Analytics</h2>
@@ -115,10 +119,8 @@
                             </form>
                         </td>
                           <td>
-                                        <a href="/delete/{{ loop.index0 }}"
-                                        onclick="return confirm('Delete this lead?')">
-                                        ❌ Delete
-                                        </a>
+                                       <a class="delete-btn"
+  
                                     </td>
 
                     </tr>

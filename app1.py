@@ -13,7 +13,15 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-secret-change-me")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_FILE = os.path.join(BASE_DIR, "leads.csv")
-CSV_HEADERS = ["Name", "Phone", "Service", "Status", "Source", "Notes", "FollowUpDate"]
+CSV_HEADERS = [
+    "Name",
+    "Phone",
+    "Service",
+    "Status",
+    "Source",
+    "Note",
+    "FollowUp"
+]
 STATUS_OPTIONS = ["NEW", "CONTACTED", "CONVERTED", "HOT"]
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
@@ -222,6 +230,17 @@ def update(index):
 
 @app.route("/delete/<int:index>")
 def delete(index):
+
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
+    leads = read_leads()
+
+    if 0 <= index < len(leads):
+        leads.pop(index)
+        write_leads(leads)
+
+    return redirect(url_for("admin"))  
     leads = read_leads()
 
     if index < len(leads):
@@ -268,10 +287,15 @@ def admin():
         return redirect(url_for("login"))
 
     leads = read_leads()
+    today_followups = sum(
+    1 for row in leads
+    if len(row) > 6 and row[6] == date.today().isoformat()
+)
     status_counts = {
         status.lower(): sum(1 for row in leads if row[3] == status)
         for status in STATUS_OPTIONS
     }
+    
 
     return render_template(
         "admin.html",
