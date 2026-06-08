@@ -106,13 +106,6 @@
                                     value="{{ row[5] if row|length > 5 else '' }}"
                                     placeholder="Add Note">
 
-                                    <td>
-                                        <a href="/delete/{{ loop.index0 }}"
-                                        onclick="return confirm('Delete this lead?')">
-                                        ❌ Delete
-                                        </a>
-                                    </td>
-
                                 <input
                                     type="date"
                                     name="followup"
@@ -121,6 +114,13 @@
                                 <button type="submit">Save</button>
                             </form>
                         </td>
+                          <td>
+                                        <a href="/delete/{{ loop.index0 }}"
+                                        onclick="return confirm('Delete this lead?')">
+                                        ❌ Delete
+                                        </a>
+                                    </td>
+
                     </tr>
                     {% else %}
                     <tr>
