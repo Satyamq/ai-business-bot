@@ -159,7 +159,7 @@ def home():
                             "role": "system",
                             "content": (
                                 "You are a professional AI business assistant "
-                                "created and managed by Satyavardhan. "
+                                "created and managed by Satyavardhan.Also I solve queries related to sales and support By open AI "
                                 "Reply in polite Hinglish. "
                                 "Be concise, friendly, and business-focused."
                             )
