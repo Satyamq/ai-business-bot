@@ -275,16 +275,23 @@ def export():
 def admin():
     if not is_logged_in():
         return redirect(url_for("login"))
+    
 
     leads = read_leads()
     today_followups = sum(
     1 for row in leads
     if len(row) > 6 and row[6] == date.today().isoformat()
 )
+    overdue_followups = sum(
+        1 for row in leads
+        if len(row) > 6 and row[6] < date.today().isoformat()
+    )
     status_counts = {
         status.lower(): sum(1 for row in leads if row[3] == status)
         for status in STATUS_OPTIONS
     }
+
+    
     
     return render_template(
     "admin.html",
@@ -295,7 +302,8 @@ def admin():
     contacted=status_counts["contacted"],
     converted=status_counts["converted"],
     hot_count=status_counts["hot"],
-    today_followups=today_followups
+    today_followups=today_followups,
+    overdue_followups=overdue_followups
 )
 
 
