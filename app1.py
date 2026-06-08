@@ -303,7 +303,8 @@ def admin():
     converted=status_counts["converted"],
     hot_count=status_counts["hot"],
     today_followups=today_followups,
-    overdue_followups=overdue_followups
+    overdue_followups=overdue_followups,
+    today=date.today().isoformat(),
 )
 
 

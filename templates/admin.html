@@ -83,7 +83,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in rows %}
+                    <tr
+                        {% if row[6] and row[6] < today %}
+                         style="background:#ffe5e5;"
+                        {% endif %}
+                        >
                     <tr>
                         <td>{{ row[0] }}</td>
                         <td>{{ row[1] }}</td>
