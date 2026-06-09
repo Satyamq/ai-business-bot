@@ -1,7 +1,4 @@
-a="mimansha"
-print(f"this is for uppercae:{a.upper()}")
-print(f"this is for lower case:{a.lower()}")
-print(f"this is a len of string: {len(a)}")
-print(f"this is a first latter :{a[0]}")
-print(f"this is last latter:{a[-1]}")
-print(f"reverse string is {a[::-1]}")
+n=[9,5,4,3,0.5,0.6,0.7,0.8,0.9]
+print(n[3])
+print(n[0:4])
+print(n[4:8])
