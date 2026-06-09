@@ -1,5 +1,5 @@
 name="satyavardhan"
-print(name.upper())
+print(name.upper(), "this is a test")
 print(name.lower())
 print(name.capitalize())
 print(name.title())
