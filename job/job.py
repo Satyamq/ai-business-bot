@@ -1,9 +1,7 @@
-name="satyavardhan"
-print(name[0])
-print(name[-1])
-print(name[1:4])
-print(name[:4])
-print(name[2:])
-print(name[:])
-print(name[::2])
-print(name[::-1])
+a="mimansha"
+print(f"this is for uppercae:{a.upper()}")
+print(f"this is for lower case:{a.lower()}")
+print(f"this is a len of string: {len(a)}")
+print(f"this is a first latter :{a[0]}")
+print(f"this is last latter:{a[-1]}")
+print(f"reverse string is {a[::-1]}")
