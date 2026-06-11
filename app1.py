@@ -228,7 +228,9 @@ def update(index):
     write_leads(leads)
 
     return redirect(url_for("admin"))
-@app.route("/delete/<int:index>")
+
+
+@app.route("/delete/<int:index>", methods=["POST"])
 def delete(index):
 
     if not is_logged_in():
@@ -265,8 +267,11 @@ def update_note(index):
 
 @app.route("/export")
 def export():
+    if not is_logged_in():
+        return redirect(url_for("login"))
+
     return send_file(
-        "leads.csv",
+        CSV_FILE,
         as_attachment=True,
         download_name="RVIRAT_Leads.csv"
     )
@@ -278,13 +283,14 @@ def admin():
     
 
     leads = read_leads()
+    today = date.today().isoformat()
     today_followups = sum(
-    1 for row in leads
-    if len(row) > 6 and row[6] == date.today().isoformat()
-)
+        1 for row in leads
+        if len(row) > 6 and row[6] == today
+    )
     overdue_followups = sum(
         1 for row in leads
-        if len(row) > 6 and row[6] < date.today().isoformat()
+        if len(row) > 6 and row[6] and row[6] < today
     )
     status_counts = {
         status.lower(): sum(1 for row in leads if row[3] == status)
@@ -294,18 +300,18 @@ def admin():
     
     
     return render_template(
-    "admin.html",
-    rows=leads,
-    status_options=STATUS_OPTIONS,
-    total=len(leads),
-    new_count=status_counts["new"],
-    contacted=status_counts["contacted"],
-    converted=status_counts["converted"],
-    hot_count=status_counts["hot"],
-    today_followups=today_followups,
-    overdue_followups=overdue_followups,
-    today=date.today().isoformat(),
-)
+        "admin.html",
+        rows=leads,
+        status_options=STATUS_OPTIONS,
+        total=len(leads),
+        new_count=status_counts["new"],
+        contacted=status_counts["contacted"],
+        converted=status_counts["converted"],
+        hot_count=status_counts["hot"],
+        today_followups=today_followups,
+        overdue_followups=overdue_followups,
+        today=today,
+    )
 
 
 ensure_csv_file()
