@@ -1,11 +1,11 @@
-n=[9,5,4,3,0.5,0.6,0.7,0.8,0.9]
-print(n[3])
-print(n[0:4])
-print(n[4:8])
-n.append(10)
-print(n)
-n.insert(0, 11)
-print(n)
-n.remove(0.5)
-print(n)
-print(len(n))
+for i in  range(10):
+    print(i)
+
+    print(max(i)) 
+    print(min(i))
+    print(sum(i))
+    print(len(i))
+    print(i**2)
+    print(mean(i))
+    print(median(i))
+    print(mode(i))
