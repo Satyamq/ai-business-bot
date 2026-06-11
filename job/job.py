@@ -1,15 +1,4 @@
-import statistics as stats
-
-numbers = list(range(10))
-
-for i in numbers:
-    print(i)
-    print(i**2)
-
-print(max(numbers))
-print(min(numbers))
-print(sum(numbers))
-print(len(numbers))
-print(stats.mean(numbers))
-print(stats.median(numbers))
-print(stats.mode(numbers))
+n=[56,7,6,65656,54543,5656,4565,5657454,456436]
+n.append(5456)
+n.sort()
+print(n)
