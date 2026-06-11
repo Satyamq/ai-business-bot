@@ -1,14 +1,15 @@
 import statistics as stats
 
-for i in  range(10):
+numbers = list(range(10))
 
+for i in numbers:
     print(i)
-
-    print(max(i)) 
-    print(min(i))
-    print(sum(i))
-    print(len(i))
     print(i**2)
-    print(stats.mean(i))
-    print(stats.median(i))
-    print(stats.mode(i))
+
+print(max(numbers))
+print(min(numbers))
+print(sum(numbers))
+print(len(numbers))
+print(stats.mean(numbers))
+print(stats.median(numbers))
+print(stats.mode(numbers))
