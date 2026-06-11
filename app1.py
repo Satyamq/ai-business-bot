@@ -313,7 +313,6 @@ def admin():
         today=today,
     )
 
-
 ensure_csv_file()
 
 
