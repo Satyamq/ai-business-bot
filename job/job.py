@@ -1,4 +1,8 @@
+impport numpy as np
+import statistics as stats
+
 for i in  range(10):
+
     print(i)
 
     print(max(i)) 
@@ -6,6 +10,6 @@ for i in  range(10):
     print(sum(i))
     print(len(i))
     print(i**2)
-    print(mean(i))
-    print(median(i))
-    print(mode(i))
+    print(stats.mean(i))
+    print(stats.median(i))
+    print(stats.mode(i))
