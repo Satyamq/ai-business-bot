@@ -1,4 +1,4 @@
-impport numpy as np
+import numpy as np
 import statistics as stats
 
 for i in  range(10):
